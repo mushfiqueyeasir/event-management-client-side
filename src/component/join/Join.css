@@ -1,0 +1,108 @@
+.zoom {
+    animation: animatezoom 0.9s;
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.w3-animate-top {
+    position: relative;
+    animation: animatetop 0.9s;
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+.w3-animate-left {
+    position: relative;
+    animation: animateleft 0.9s;
+}
+
+@keyframes animateleft {
+    from {
+        left: -300px;
+        opacity: 0;
+    }
+
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+.w3-animate-right {
+    position: relative;
+    animation: animateright 0.9s;
+}
+
+@keyframes animateright {
+    from {
+        right: -300px;
+        opacity: 0;
+    }
+
+    to {
+        right: 0;
+        opacity: 1;
+    }
+}
+
+.w3-animate-bottom {
+    position: relative;
+    animation: animatebottom 0.9s;
+}
+
+@keyframes animatebottom {
+    from {
+        bottom: -300px;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 640px) {
+
+    @keyframes animateleft {
+        from {
+            top: -300px;
+            opacity: 0;
+        }
+    
+        to {
+            top: 0;
+            opacity: 1;
+        }
+    }
+
+    @keyframes animateright {
+        from {
+            bottom: -300px;
+            opacity: 0;
+        }
+    
+        to {
+            bottom: 0;
+            opacity: 1;
+        }
+    }
+  }
