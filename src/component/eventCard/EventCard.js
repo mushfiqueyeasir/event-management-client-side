@@ -3,11 +3,11 @@ import { GLOBAL_CONTEXT } from "../../layer/AppLayer";
 import { deleteItem } from "../../hooks/delete";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import { formateDate, timeZone } from "../../utility/formateTime";
+import { GMTFinder, timeZone } from "../../utility/formateTime";
 import { update } from "../../hooks/update";
 
 const EventCard = ({ event }) => {
-  const { user, eventsRefetch } = useContext(GLOBAL_CONTEXT);
+  const { user, eventsRefetch, userEventsRefetch } = useContext(GLOBAL_CONTEXT);
   const {
     _id,
     eventImage,
@@ -22,7 +22,10 @@ const EventCard = ({ event }) => {
     eventAttendees,
   } = event;
 
-  const rsvpCheck = eventAttendees.find((item) => item.email === user?.email);
+  const rsvpCheck = eventAttendees.find((item) => item?.email === user?.email);
+
+  const startingDate = `${startDate.slice(0, 10)}T${startTime}Z`;
+  const endingDate = `${endDate.slice(0, 10)}T${endTime}Z`;
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -35,13 +38,18 @@ const EventCard = ({ event }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteItem({ id: `events/${id}`, refetch: eventsRefetch, rsvp: true });
+        deleteItem({
+          id: `events/${id}`,
+          refetch: eventsRefetch,
+          rsvp: true,
+          userRefetch: userEventsRefetch,
+        });
       }
     });
   };
   const handleRSVP = (id) => {
     const data = event;
-    data.eventAttendees.push({ email: user?.email, avatar: user.photoURL });
+    data.eventAttendees.push({ email: user?.email, avatar: user?.photoURL });
     console.log(data);
     update({
       id: `events/${id}`,
@@ -52,10 +60,7 @@ const EventCard = ({ event }) => {
   };
 
   return (
-    <div
-      // to={`/event/${_id}`}
-      className="bg-white overflow-hidden shadow rounded-2xl  cursor-pointer hover:scale-[1.015] duration-300  relative"
-    >
+    <div className="bg-white overflow-hidden shadow rounded-2xl  cursor-pointer hover:scale-[1.015] duration-300  relative">
       {user?.email === eventCreator && (
         <Link
           to={`/eventUpdate/${_id}`}
@@ -74,7 +79,10 @@ const EventCard = ({ event }) => {
       )}
 
       <img
-        src={eventImage}
+        src={
+          eventImage ||
+          "https://img.freepik.com/premium-vector/event-speech-bubble-banner-with-event-text-glassmorphism-style-business-marketing-advertising-vector-isolated-background-eps-10_399089-2460.jpg?w=2000"
+        }
         alt="People"
         className="w-full object-cover h-48 sm:h-48 md:h-64"
       />
@@ -103,13 +111,14 @@ const EventCard = ({ event }) => {
             <div className="text-sm flex items-center gap-x-2">
               <i className="fa-regular fa-calendar-days" />
               <p className="leading-none">
-                {formateDate(startDate)} to {formateDate(endDate)}
+                {timeZone(startingDate)[0]} to {timeZone(endingDate)[0]}
               </p>
             </div>
             <div className="text-sm flex items-center gap-x-2">
               <i className="fa-regular fa-clock" />
               <p className="leading-none">
-                {startTime} to {endTime} (UTC{timeZone(startDate)})
+                {timeZone(startingDate)[1]} to {timeZone(endingDate)[1]} (
+                {GMTFinder(startDate)})
               </p>
             </div>
           </div>
@@ -118,16 +127,22 @@ const EventCard = ({ event }) => {
               <button
                 disabled={rsvpCheck}
                 onClick={() => handleRSVP(_id)}
-                className="btn  btn-primary"
+                className="btn bg-blue-400 border-blue-400 hover:bg-blue-500  hover:border-blue-500"
               >
                 RSVP
               </button>
             ) : (
-              <Link to="/join" className="btn  btn-primary">
+              <Link
+                to="/join"
+                className="btn bg-blue-400 border-blue-400 hover:bg-blue-500  hover:border-blue-500"
+              >
                 RSVP
               </Link>
             )}
-            <Link to={`/event/${_id}`} className="btn  btn-primary">
+            <Link
+              to={`/event/${_id}`}
+              className="btn  bg-orange-400 border-orange-400 hover:bg-orange-500  hover:border-orange-500"
+            >
               Detail
             </Link>
           </div>

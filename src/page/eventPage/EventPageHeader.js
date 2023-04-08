@@ -49,7 +49,7 @@ const EventPageHeader = ({
           ) : (
             <Link
               to="/join"
-              className="btn bg-blue-500  border-blue-400  hover:bg-blue-600  hover:border-blue-600"
+              className="btn bg-yellow-500  border-yellow-400  hover:bg-yellow-600  hover:border-yellow-600"
             >
               RSVP
             </Link>
@@ -75,7 +75,7 @@ const EventPageHeader = ({
 
         <div className="flex items-center gap-2 rounded-md">
           <FacebookShareButton
-            url={`https://mushfique-yeasir.netlify.app/event/${id}`}
+            url={`https://event-hive-rb.netlify.app/event/${id}`}
             quote={eventTitle}
           >
             <span className="btn bg-green-500  border-green-400  hover:bg-green-600  hover:border-green-600">

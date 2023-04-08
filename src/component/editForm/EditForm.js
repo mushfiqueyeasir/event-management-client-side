@@ -67,7 +67,7 @@ const EditForm = ({ data }) => {
       endDate: event.target.endDate.value,
       startTime: event.target.startTime.value,
       endTime: event.target.endTime.value,
-      eventCreator: user.email,
+      eventCreator: user?.email,
     };
 
     update({

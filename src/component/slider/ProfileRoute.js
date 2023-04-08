@@ -1,10 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const ProfileRoute = ({ open, routeLogo, routeName, routeEndpoint }) => {
+const ProfileRoute = ({ open, routeLogo, routeName, routeEndpoint, close }) => {
   return (
     <NavLink
       to={routeEndpoint}
+      onClick={() => close(false)}
       className={`group flex items-center text-sm  gap-3.5 font-medium p-2 bg-gray-200"  ${
         open && "bg-slate-600"
       }rounded-md disabled ${!open && "scale-0"}`}

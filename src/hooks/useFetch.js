@@ -11,13 +11,16 @@ const useFetch = ({ api, parameter, query }) => {
   if (parameter) {
     uri = `${process.env.REACT_APP_API_URL}/${api}/${parameter}`;
   } else if (query) {
-    const email = query.email ? query.email : "";
+    const email = query?.email ? query.email : "";
     const search = query.search ? query.search : "";
     const page = query.page ? query.page : "";
+    const rsvp = query.rsvp ? query.rsvp : "";
 
     uri = `${process.env.REACT_APP_API_URL}/${api}?${
       email && `email=${email}&`
-    }${search && `search=${search}&`}${page && `page=${page}`}`;
+    }${search && `search=${search}&`}${rsvp && `rsvp=${rsvp}`}${
+      page && `page=${page}`
+    }`;
   } else {
     uri = `${process.env.REACT_APP_API_URL}/${api}`;
   }

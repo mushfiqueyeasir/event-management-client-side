@@ -8,7 +8,11 @@ const EventAttendees = ({ eventAttendees }) => {
         {eventAttendees.map((attendees) => (
           <div className="flex items-center  gap-3 border border-gray-300 p-2  rounded-md">
             <img
-              src={attendees.avatar}
+              src={
+                attendees.avatar
+                  ? attendees.avatar
+                  : "https://www.w3schools.com/howto/img_avatar.png"
+              }
               alt=""
               className="w-[35px] rounded-full"
             />

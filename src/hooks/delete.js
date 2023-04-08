@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 // import { getToken } from "../utility/Constant";
 
-export const deleteItem = ({ id, refetch }) => {
+export const deleteItem = ({ id, refetch, userRefetch }) => {
   const requestOptions = {
     method: "DELETE",
     headers: {
@@ -22,8 +22,13 @@ export const deleteItem = ({ id, refetch }) => {
         const error = (data && data.message) || response.status;
         return Promise.reject(error);
       } else {
-        refetch();
-        toast.info("Data Deleted", {
+        if (refetch) {
+          refetch();
+        }
+        if (userRefetch) {
+          userRefetch();
+        }
+        toast.info("Event Deleted", {
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,

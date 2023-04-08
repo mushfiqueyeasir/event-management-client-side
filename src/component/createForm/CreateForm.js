@@ -25,6 +25,16 @@ const CreateForm = () => {
   const [fileName, setFileName] = useState("No file chosen");
   const [eventImage, setEventImage] = useState(null);
 
+  const [minDate, setMinDate] = useState();
+  const [maxDate, setMaxDate] = useState();
+
+  const handleMinDate = (event) => {
+    setMinDate(event.target.value);
+  };
+  const handleMaxDate = (event) => {
+    setMaxDate(event.target.value);
+  };
+
   const handleProfileImage = (event) => {
     const size = event.target.files[0].size;
     if (size < 5000000) {
@@ -53,7 +63,7 @@ const CreateForm = () => {
       endDate: event.target.endDate.value,
       startTime: event.target.startTime.value,
       endTime: event.target.endTime.value,
-      eventCreator: user.email,
+      eventCreator: user?.email,
     };
 
     create({
@@ -152,19 +162,22 @@ const CreateForm = () => {
               label={"Start Date"}
               name="startDate"
               required={true}
+              onChange={handleMinDate}
+              max={maxDate}
             />
             <CustomInputField
               type="date"
               label={"End Date"}
               name="endDate"
               required={true}
+              onChange={handleMaxDate}
+              min={minDate}
             />
 
             <CustomInputField
               type="time"
               label={"Start Time"}
               name="startTime"
-              required={true}
             />
             <CustomInputField
               type="time"

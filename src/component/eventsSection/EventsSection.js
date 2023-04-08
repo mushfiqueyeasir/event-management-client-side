@@ -5,7 +5,7 @@ import Pagination from "../pagination/Pagination";
 
 const EventsSection = ({ events }) => {
   return (
-    <section className="container mx-auto py-6 px-2">
+    <section className="container mx-auto py-6 px-2 min-h-[49vh]">
       <Pagination events={events} />
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {events.data.map((event) => (

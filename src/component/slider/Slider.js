@@ -13,7 +13,9 @@ import { GLOBAL_CONTEXT } from "../../layer/AppLayer";
 const Slider = ({ open, setOpen }) => {
   const { user } = useContext(GLOBAL_CONTEXT);
   const userName = user?.displayName;
-  const userImage = user?.photoURL;
+  const userImage = user?.photoURL
+    ? user?.photoURL
+    : "https://www.w3schools.com/howto/img_avatar.png";
   const handleSignOut = () => {
     signOut(auth);
     setOpen(!open);
@@ -43,7 +45,7 @@ const Slider = ({ open, setOpen }) => {
           style={{
             transitionDelay: `${1 + 3}00ms`,
           }}
-          className={`rounded-full border-4 p-1 border-[#57A3E1] duration-500 ${
+          className={`w-[10rem] rounded-full border-4 p-1 border-[#57A3E1] duration-500 ${
             !open && "opacity-0 translate-x-28 overflow-hidden"
           }`}
         />
@@ -64,24 +66,28 @@ const Slider = ({ open, setOpen }) => {
           routeLogo={AiOutlineHome}
           routeName={"Home"}
           routeEndpoint={"/home"}
+          close={setOpen}
         />
         <ProfileRoute
           open={open}
           routeLogo={CgProfile}
           routeName={"My Profile"}
           routeEndpoint={"/profile"}
+          close={setOpen}
         />
         <ProfileRoute
           open={open}
           routeLogo={HiOutlineSpeakerphone}
           routeName={"My Events"}
           routeEndpoint={"/myEvents"}
+          close={setOpen}
         />
         <ProfileRoute
           open={open}
           routeLogo={BsPencil}
           routeName={"Create Events"}
           routeEndpoint={"/createEvents"}
+          close={setOpen}
         />
         <LogOutButton open={open} handleSignOut={handleSignOut} />
       </div>

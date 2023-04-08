@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+/* eslint-disable no-useless-escape */
+import React, { useState } from "react";
 import google from "../../assets/images/icons8-google-96.png";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import {
@@ -64,7 +65,7 @@ const Login = ({ swapJoinPage }) => {
               className="hero"
               style={{
                 backgroundImage:
-                  "url(https://img.freepik.com/premium-photo/job-interview-recruitment-process-new-team-member-company-recruit-new-candidate_42957-9692.jpg?w=1800)",
+                  "url(https://img.freepik.com/free-vector/silhouette-people-demonstration_23-2147997865.jpg?w=826&t=st=1680930598~exp=1680931198~hmac=df2dc8938cac52cd082f387d951351af5daef343772c4da1337f24cb8e1d4c90)",
               }}
             >
               <div className="hero-content hero-overlay bg-opacity-90 text-center text-neutral-content">
@@ -72,7 +73,7 @@ const Login = ({ swapJoinPage }) => {
                   <h1 className="mb-5 text-4xl font-bold">New Here?</h1>
                   <p className="mb-5">
                     Create a account with your personal information to explore
-                    the Smart CV and Resume we made just for you!
+                    the latest events and grow with others!
                   </p>
                   <button
                     className="btn bg-[#4a685a] hover:bg-[#25362E] border-0"

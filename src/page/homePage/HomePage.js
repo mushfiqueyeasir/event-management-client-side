@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import SearchBar from "../../component/searchBar/SearchBar";
 import EventsSection from "../../component/eventsSection/EventsSection";
-import RequireAuth from "../../auth/RequireAuth";
 import { GLOBAL_CONTEXT } from "../../layer/AppLayer";
+import { Footer } from "../../component/footer/Footer";
 
 const HomePage = () => {
   const { events, user, handleEmail } = useContext(GLOBAL_CONTEXT);
@@ -11,6 +11,7 @@ const HomePage = () => {
     <section>
       <SearchBar />
       <EventsSection events={events} />
+      <Footer />
     </section>
   );
 };

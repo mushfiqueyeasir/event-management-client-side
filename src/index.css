@@ -5,8 +5,15 @@
 .active{
   background-color: #57A3E1;
   color: white;
-  border-radius: 10px;
+  border-radius: 10px;  
 }
+
+.active span{
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
 
 
 body {

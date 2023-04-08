@@ -10,6 +10,9 @@ const CustomInputField = ({
   widthHalf,
   textArea,
   defaultValue,
+  onChange,
+  min,
+  max,
 }) => {
   const dateObject =
     type === "date" && defaultValue ? new Date(defaultValue) : null;
@@ -29,7 +32,7 @@ const CustomInputField = ({
       {textArea ? (
         <textarea
           defaultValue={defaultValue}
-          rows="4"
+          rows="6"
           type={type}
           name={name}
           className={inputCX}
@@ -42,6 +45,9 @@ const CustomInputField = ({
           name={name}
           className={inputCX}
           required={required}
+          onChange={onChange && onChange}
+          min={min && min}
+          max={max && max}
         />
       )}
     </fieldset>

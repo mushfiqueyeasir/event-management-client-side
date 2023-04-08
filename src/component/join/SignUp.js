@@ -111,14 +111,15 @@ const SignUp = ({ swapJoinPage }) => {
               className="hero"
               style={{
                 backgroundImage:
-                  "url(https://img.freepik.com/premium-photo/partnership-two-business-people-shaking-hand-after-business-job-interview-meeting-room-office_33829-103.jpg?w=1380)",
+                  "url(https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8am9pbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60)",
               }}
             >
               <div className="hero-content hero-overlay bg-opacity-90 text-center text-neutral-content">
                 <div className="w-[18.5rem] lg:w-[28rem]">
                   <h1 className="mb-5 text-3xl font-bold">Already A Member?</h1>
                   <p className="mb-5">
-                    Please Login to get you own Smart CV and Resume!
+                    Please Login to join some life changing events and grow
+                    yourself!
                   </p>
                   <button
                     className="btn bg-[#4a685a] hover:bg-[#25362E] border-0"

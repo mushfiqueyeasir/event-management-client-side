@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ProfileDropdown from "./ProfileDropdown";
 
 import logo from "../../assets/images/logo.png";
 import Slider from "../slider/Slider";
 import { GLOBAL_CONTEXT } from "../../layer/AppLayer";
+import Navigation from "./Navigation";
 
 const NavBar = () => {
   const { user } = useContext(GLOBAL_CONTEXT);
@@ -21,9 +22,10 @@ const NavBar = () => {
             <img src={logo} alt="" className=" w-[130px] " />
           </Link>
         </div>
+        {!open && <Navigation user={user} open={open} />}
 
         {user && (
-          <div className="navbar-end">
+          <div className="navbar-end pr-2">
             <ProfileDropdown setOpen={setOpen} />
           </div>
         )}
