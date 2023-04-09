@@ -1,37 +1,41 @@
-import axios from "axios";
 import { toast } from "react-toastify";
 
 export const update = ({ id, data, refetch, userRefetch, rsvp, loading }) => {
-  axios({
+  const requestOptions = {
     method: "PUT",
-    url: `${process.env.REACT_APP_API_URL}/${id}`,
-    data: data,
-  })
-    .then(function (response) {
-      if (refetch) {
-        refetch();
-      }
-      if (userRefetch) {
-        userRefetch();
-      }
-      toast.success(
-        `${rsvp ? "Event Reserved" : "Event Updated"} Successfully`,
-        {
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  };
+
+  fetch(`${process.env.REACT_APP_API_URL}/${id}`, requestOptions)
+    .then((response) => {
+      if (response.ok) {
+        if (refetch) {
+          refetch();
         }
-      );
+        if (userRefetch) {
+          userRefetch();
+        }
+        toast.success(
+          `${rsvp ? "Event Reserved" : "Event Updated"} Successfully`,
+          {
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }
+        );
+      } else {
+        throw new Error("Network response was not ok.");
+      }
     })
-    .catch(function (response) {
-      //handle error
-      console.log(response);
+    .catch((error) => {
+      console.log(error);
       toast
-        .error(response.message, {
+        .error(error.message, {
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,

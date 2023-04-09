@@ -1,6 +1,4 @@
-import axios from "axios";
 import { toast } from "react-toastify";
-// import { getToken } from "../utility/Constant";
 
 export const create = ({
   endPoint,
@@ -13,18 +11,23 @@ export const create = ({
   fileNameReset,
 }) => {
   loading(true);
+
   const headers = {
-    // Authorization: "Bearer " + getToken(),
     "Content-Type": "application/json",
   };
 
-  axios({
-    method: "post",
-    url: `${process.env.REACT_APP_API_URL}/${endPoint}`,
-    data: data,
+  fetch(`${process.env.REACT_APP_API_URL}/${endPoint}`, {
+    method: "POST",
     headers: headers,
+    body: JSON.stringify(data),
   })
-    .then(function (response) {
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
+      return response.json();
+    })
+    .then((response) => {
       if (refetch) {
         refetch();
       }
@@ -53,7 +56,7 @@ export const create = ({
     .catch((error) => {
       console.log(error);
 
-      toast.error(error.response.data.message, {
+      toast.error(error.message, {
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

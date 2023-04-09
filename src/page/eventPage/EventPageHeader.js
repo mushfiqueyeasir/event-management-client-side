@@ -8,6 +8,7 @@ import { FacebookShareButton } from "react-share";
 const EventPageHeader = ({
   eventTitle,
   user,
+  eventCreator,
   rsvpCheck,
   handleRSVP,
   id,
@@ -55,23 +56,27 @@ const EventPageHeader = ({
             </Link>
           )}
         </div>
-        <div className="flex items-center gap-2 rounded-md">
-          <Link
-            to={`/eventUpdate/${id}`}
-            className="btn bg-blue-500  border-blue-400  hover:bg-blue-600  hover:border-blue-600"
-          >
-            Edit
-          </Link>
-        </div>
+        {user?.email === eventCreator && (
+          <div className="flex items-center gap-2 rounded-md">
+            <Link
+              to={`/eventUpdate/${id}`}
+              className="btn bg-blue-500  border-blue-400  hover:bg-blue-600  hover:border-blue-600"
+            >
+              Edit
+            </Link>
+          </div>
+        )}
 
-        <div className="flex items-center gap-2 rounded-md">
-          <button
-            onClick={() => handleDelete(id)}
-            className="btn bg-red-500  border-red-400  hover:bg-red-600  hover:border-red-600"
-          >
-            Delete
-          </button>
-        </div>
+        {user?.email === eventCreator && (
+          <div className="flex items-center gap-2 rounded-md">
+            <button
+              onClick={() => handleDelete(id)}
+              className="btn bg-red-500  border-red-400  hover:bg-red-600  hover:border-red-600"
+            >
+              Delete
+            </button>
+          </div>
+        )}
 
         <div className="flex items-center gap-2 rounded-md">
           <FacebookShareButton

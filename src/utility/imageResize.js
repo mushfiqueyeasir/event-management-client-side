@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const convertImage = async (image, setImage, loading) => {
   if (loading) {
     loading(true);
@@ -8,19 +6,20 @@ export const convertImage = async (image, setImage, loading) => {
   formData.append("file", image);
   formData.append("upload_preset", "pjajpjjt");
   try {
-    await axios
-      .post("https://api.cloudinary.com/v1_1/dfgq8scq0/image/upload", formData)
-      .then(function (response) {
-        console.log(response);
-        setImage(response.data.url);
-      })
-      .finally(() => {
-        if (loading) {
-          loading(false);
-        }
-        console.log("asdasdf");
-      });
+    const response = await fetch(
+      "https://api.cloudinary.com/v1_1/dfgq8scq0/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    const data = await response.json();
+    setImage(data.url);
   } catch (error) {
     console.log(error);
+  } finally {
+    if (loading) {
+      loading(false);
+    }
   }
 };

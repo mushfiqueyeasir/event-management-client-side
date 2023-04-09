@@ -14,9 +14,12 @@ export const timeZone = (dateString) => {
   const localDateTimeString = inputDateTime.toLocaleString().split(",");
   let date = localDateTimeString[0];
   let tempTime = localDateTimeString[1];
-  let time = tempTime.slice(tempTime.length - 2);
+  let time = tempTime && tempTime.slice(tempTime.length - 2);
 
-  return [date, tempTime.slice(0, tempTime.length - 6) + " " + time];
+  return [
+    date,
+    tempTime && tempTime.slice(0, tempTime.length - 6) + " " + time,
+  ];
 };
 
 export const GMTFinder = (date) => {

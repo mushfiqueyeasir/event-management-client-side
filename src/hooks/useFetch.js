@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 const useFetch = ({ api, parameter, query }) => {
@@ -26,18 +24,23 @@ const useFetch = ({ api, parameter, query }) => {
   }
 
   useEffect(() => {
-    axios
-      .get(uri)
-      .then((response) => {
-        setData(response.data);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(uri);
+        const responseData = await response.json();
+        setData(responseData);
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log(error);
         setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, [uri, refetchData]);
+
   const refetch = () => setRefetchData((prevState) => !prevState);
+
   return [data, loading, refetch];
 };
 
