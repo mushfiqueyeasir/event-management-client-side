@@ -6,20 +6,26 @@ import { Link } from "react-router-dom";
 import { GMTFinder, timeZone } from "../../utility/formateTime";
 import { update } from "../../hooks/update";
 
-const EventCard = ({ event }) => {
-  const { user, eventsRefetch, userEventsRefetch } = useContext(GLOBAL_CONTEXT);
+const EventCard = ({ event = {} }) => {
+  const context = useContext(GLOBAL_CONTEXT);
   const {
-    _id,
-    eventImage,
-    eventTitle,
-    eventDescription,
-    eventLocation,
-    startDate,
-    endDate,
-    startTime,
-    endTime,
-    eventCreator,
-    eventAttendees,
+    user = { email: "" },
+    eventsRefetch,
+    userEventsRefetch,
+  } = context || {};
+
+  const {
+    _id = "",
+    eventImage = "",
+    eventTitle = "",
+    eventDescription = "",
+    eventLocation = "",
+    startDate = "",
+    endDate = "",
+    startTime = "",
+    endTime = "",
+    eventCreator = "",
+    eventAttendees = [],
   } = event;
 
   const rsvpCheck = eventAttendees.find((item) => item?.email === user?.email);
@@ -88,18 +94,23 @@ const EventCard = ({ event }) => {
       />
       <div className="p-4 md:px-6">
         <div className="flex  justify-between">
-          <h3 className="font-bold text-2xl leading-tight sm:leading-normal capitalize">
+          <h3
+            data-testid="title"
+            className="font-bold text-2xl leading-tight sm:leading-normal capitalize"
+          >
             {eventTitle.slice(0, 17)}
             {eventTitle.length > 17 && "..."}
           </h3>
           <h2 className="text-lg  font-semibold  capitalize flex gap-x-2 items-center">
             <i className="fa-solid fa-map-location-dot"></i>
-            {eventLocation.replaceAll(" ", "").slice(0, 10)}
+            <span data-testid="location">
+              {eventLocation.replaceAll(" ", "").slice(0, 10)}
+            </span>
           </h2>
         </div>
 
         <div className="py-2 min-h-[4.8rem] lg:min-h-[5.5rem] text-sm lg:text-base">
-          <p>
+          <p data-testid="description">
             {eventDescription.slice(0, 150)}
             {eventDescription.length > 150 && "..."}
           </p>

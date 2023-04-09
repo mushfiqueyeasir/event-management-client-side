@@ -25,7 +25,7 @@ const EventPage = () => {
     return <Loading />;
   }
 
-  const { _id, eventTitle, eventDescription, eventAttendees } =
+  const { _id, eventTitle, eventDescription, eventAttendees, eventCreator } =
     uniqueEvent.data;
   const rsvpCheck = eventAttendees.find((item) => item.email === user?.email);
 
@@ -78,6 +78,7 @@ const EventPage = () => {
           <EventPageHeader
             eventTitle={eventTitle}
             user={user}
+            eventCreator={eventCreator}
             rsvpCheck={rsvpCheck}
             handleRSVP={handleRSVP}
             id={_id}
